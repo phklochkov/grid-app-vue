@@ -1,17 +1,27 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <grid :items="items" :size="15" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Grid from './components/Grid.vue'
+import {getGridItem} from './svc/grid'
 
 export default {
   name: 'app',
+  data () {
+    return {
+      items: [],
+    }
+  },
+  created () {
+    getGridItem()
+      .then(x => this.items = x)
+      .catch(e => console.log('error', e))
+  },
   components: {
-    HelloWorld
+    Grid,
   }
 }
 </script>
@@ -21,8 +31,5 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
