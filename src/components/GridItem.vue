@@ -1,7 +1,7 @@
 <template>
-  <div :class="['grid-item', item.title ? 'draggable' : '',]" :style="style" draggable="true"
-    @dragover.prevent @dragstart.stop="onDragStart" @dragenter="onDragEnter"
-    @dragleave="onDragLeave" @drop.stop="onDrop">
+  <div :class="['grid-item', item.title ? 'draggable' : '',]" :style="style"
+    :draggable="!!item.title" @dragover.prevent @dragstart.stop="onDragStart"
+    @dragenter="onDragEnter" @dragleave="onDragLeave" @drop.stop="onDrop">
     <div class="grid-item-title">{{ item.title }}</div>
   </div>
 </template>
@@ -56,13 +56,18 @@ export default {
     align-items: center;
   }
 
+  .grid-item > .grid-item-title {
+    pointer-events: none;
+  }
+
   .grid-item.draggable {
     cursor: -webkit-grab;
     cursor: grab;
   }
 
   .grid-item.over {
-    background-color: rgba(0, 170, 237, 0.8);
+    background-color: #28abe3;
+    box-shadow: 0px 0px 5px 3px #28abe3;
   }
 </style>
 
